@@ -12,6 +12,7 @@ class StatusController {
 
     static checkStatus(req, res) {
         const userId = req.params.userId;
+        const viewerId = req.query.viewerId; // optional: who is checking
         const status = Status.getByUserId(userId);
 
         if (!status) {
@@ -23,6 +24,10 @@ class StatusController {
 
         const isValid = Status.isValid(status);
         if (isValid) {
+            // If a viewerId is supplied, record that they saw it
+            if (viewerId) {
+                Status.addViewer(userId, viewerId);
+            }
             res.json({ 
                 valid: true, 
                 content: status.content 
@@ -49,6 +54,20 @@ class StatusController {
                 message: 'Original status not found or has expired, cannot re-share' 
             });
         }
+    }
+
+    static deleteStatus(req, res) {
+        const { userId } = req.body;
+        if (!userId) return res.json({ message: 'userId required' });
+        const ok = Status.delete(userId);
+        if (ok) return res.json({ message: 'Status deleted' });
+        return res.json({ message: 'No status found to delete' });
+    }
+
+    static getViewers(req, res) {
+        const userId = req.params.userId;
+        const viewers = Status.getViewers(userId);
+        res.json({ viewers });
     }
 }
 

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WApp-like Status — Demo</title>
+  <link rel="stylesheet" href="/public/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>WApp Status Demo</h1>
+    <p class="subtitle">Post, check and re-share ephemeral statuses</p>
+    <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+      <label style="font-size:13px;color:var(--muted);">Session user:</label>
+      <input id="session-user" placeholder="your id (e.g. me)" style="width:160px;padding:6px;border-radius:8px" />
+      <button id="set-session">Set</button>
+      <div id="session-display" style="margin-left:12px;color:var(--muted);font-size:13px"></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card" id="post-card">
+      <h2>Post a Status</h2>
+      <input id="post-user" placeholder="Your user id (e.g. user1)" />
+      <textarea id="post-content" placeholder="What's on your mind?" rows="3"></textarea>
+      <button id="post-btn">Post Status</button>
+      <div class="result" id="post-result"></div>
+    </section>
+
+    <section class="card" id="check-card">
+      <h2>Check Status</h2>
+      <input id="check-user" placeholder="Check user id (e.g. user1)" />
+      <button id="check-btn">Check</button>
+      <div class="result" id="check-result"></div>
+    </section>
+
+    <section class="card" id="reshare-card">
+      <h2>Re-share Status</h2>
+      <input id="orig-user" placeholder="Original user id (e.g. user1)" />
+      <input id="reshare-user" placeholder="Your user id (e.g. user2)" />
+      <button id="reshare-btn">Re-share</button>
+      <div class="result" id="reshare-result"></div>
+    </section>
+
+    <section class="card" id="feed-card">
+      <h2>Local Feed (Ephemeral)</h2>
+      <div id="feed" class="feed"></div>
+      <div style="margin-top:8px;">
+        <input id="viewers-user" placeholder="Show viewers for user id" style="width:60%" />
+        <button id="show-viewers">Show Viewers</button>
+        <div id="viewers-result" class="result" style="margin-top:8px"></div>
+      </div>
+      <button id="refresh-feed">Refresh Feed</button>
+    </section>
+  </main>
+
+  <footer class="footer">This is a demo—statuses expire after 5 minutes (demo setting).</footer>
+
+  <script src="/public/app.js"></script>
+</body>
+</html>
